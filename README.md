@@ -1,5 +1,4 @@
-Locomotive JS Bootstrap
-<hr/>
+<h1>Locomotive JS Bootstrap</h1>
 
 <h3>Minimalistic</h3>
 <ul>
