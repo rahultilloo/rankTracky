@@ -6,6 +6,12 @@
     "locomotive": "0.3.x",
     "express": "3.x.x",
     "connect-powered-by": "0.1.x",
-    "ejs": "0.8.x"
+    "ejs": "0.8.x",
+    "mongoose": "~3.8.5",
+    "connect-mongo": "~0.4.0",
+    "locomotive-mongoose": "~0.1.0",
+    "ejs-locals": "~1.0.2",
+    "passport": "~0.1.18",
+    "mongoose-types": "~1.0.3"
   }
 }
