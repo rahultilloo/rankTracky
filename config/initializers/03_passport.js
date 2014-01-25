@@ -56,6 +56,7 @@ passport.use(new GoogleStrategy({
         callbackURL: config.publishers.Google.callbackURL
     },
     function(token, refreshToken, profile, done) {
+        console.log(profile)
         /*
  AccountModel
   */

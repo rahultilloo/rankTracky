@@ -22,11 +22,13 @@ module.exports = function routes() {
 		//Facebook Strategy
 		this.match('auth/facebook', passport.authenticate('twitter')); this.match('auth/facebook/callback', passport.authenticate('twitter'));
 		//Google Strategy
-		this.match('authenticate/google', passport.authenticate('google', {
+		this.match('auth/google', passport.authenticate('google', {
 			accessType: 'offline',
 			approvalPrompt: 'force',
 			scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/plus.login']
-		})); this.match('authenticate/google/callback', passport.authenticate('google'));
+		}),{via:['post','get']}); 
+
+		this.match('auth/google/callback', passport.authenticate('google'));
 
 
 
