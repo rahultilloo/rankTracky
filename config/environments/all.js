@@ -4,10 +4,6 @@ var express = require('express'),
     mongoStore = require('connect-mongo')(express),
     mongoose = require('mongoose'),
     passport = require('passport');
-
-
-console.log(process.env.NODE_ENV)
-
 module.exports = function() {
 
 
