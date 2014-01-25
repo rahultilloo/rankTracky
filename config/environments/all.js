@@ -5,10 +5,6 @@ var express = require('express'),
     mongoose = require('mongoose'),
     passport = require('passport');
 module.exports = function() {
-
-
-    //auto load helpers and logged in account
-
     // Warn of version mismatch between global "lcm" binary and local installation of Locomotive.
     if (this.version !== require('locomotive').version) {
         var msg = 'version mismatch between local (%s) and global (%s) Locomotive module';
