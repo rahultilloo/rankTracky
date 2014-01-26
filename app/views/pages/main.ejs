@@ -3,10 +3,87 @@
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.0.3/css/font-awesome.min.css" />
+<script type="text/javascript" src="//cdn.jsdelivr.net/knockout/3.0.0beta/knockout.js"></script>
+
+         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/2013/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'></script>
+
+
+    <script src="http://xoxco.com/2013/js/jQuery-Tags-Input/jquery.tagsinput.js"/></script>
+
+  <style>
+
+  </style>
+  <script>
+
+  </script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome aboard! Visit <a href="http://locomotivejs.org/">locomotivejs.org</a> for details.</p>
+    <h1>Google Rank Tracker!</h1>
+    <p>Instant Google Rank Tracking wih US IP's</p>
     
+
+    <div class="tagContainer">
+  
+</div>
+<form class="form-wrapper" method="/api/">
+    <input name="website" type="text" id="search" placeholder="Website" required>
+    <div class="" id="submit">
+    	<i class="fa fa-rocket button-icon"></i> 
+    	<i class="fa fa-cog fa-spin loader"></i>
+Submit
+    </div>
+    <input name = "keywords" class="tags" type="text"/>
+  
+</form>
+<form class="form-wrapper">
+  <h2>Results</h2>
+  <table>
+
+<tbody data-bind="foreach: all">
+<tr>
+	<td><a data-bind="text:$data.response"></a></td>
+</tbody>
+  </table>
+
+
+</form>
+<script>
+var ViewModel = function() {
+    this.all = ko.observableArray([]);
+};
+
+
+$(document).ready(function(){
+	 var vm = new ViewModel()
+ko.applyBindings(vm); 
+	$(".loader").hide();
+	$('.tags').tagsInput({
+		        	"width": "75%",
+		        	"height": "70px",
+		        	'defaultText':''
+	        	});
+	$("#submit").on('click',function(e){
+			$(".loader").show();
+			$(".button-icon").hide();
+		e.preventDefault();
+		var website = $('input[name="website"]').val();
+		var keywords = $('input[name="keywords"]').val();
+		console.log(website)
+	$.post('/api',{website:website,keywords:keywords},function(r){
+			$(".loader").hide();
+						$(".button-icon").show();
+
+		vm.all(r.response)
+	})
+
+	})
+})
+
+
+
+</script>
   </body>
 </html>

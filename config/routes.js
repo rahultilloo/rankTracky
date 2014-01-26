@@ -10,6 +10,7 @@ module.exports = function routes() {
 	this.root('pages#main');
 
 	/** Authentications **/
+	this.match('api', "pages#api",{via : ['POST','GET']});
 
 	this.match('auth', passport.authenticate('local', {
 			successRedirect: '/',

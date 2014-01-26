@@ -1,0 +1,126 @@
+* Adding handle: conn: 0x7fbf72804000
+* Adding handle: send: 0
+* Adding handle: recv: 0
+* Curl_addHandleToPipeline: length: 1
+* - Conn 0 (0x7fbf72804000) send_pipe: 1, recv_pipe: 0
+* About to connect() to google.com port 80 (#0)
+*   Trying 173.194.46.6...
+* Connected to google.com (173.194.46.6) port 80 (#0)
+> GET / HTTP/1.1
+> User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
+> Host: google.com
+> Accept: */*
+> Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+> Accept-Language: en-US,en;q=0.8
+> 
+< HTTP/1.1 301 Moved Permanently
+< Location: http://www.google.com/
+< Content-Type: text/html; charset=UTF-8
+< Date: Sun, 26 Jan 2014 01:53:36 GMT
+< Expires: Tue, 25 Feb 2014 01:53:36 GMT
+< Cache-Control: public, max-age=2592000
+* Server gws is not blacklisted
+< Server: gws
+< Content-Length: 219
+< X-XSS-Protection: 1; mode=block
+< X-Frame-Options: SAMEORIGIN
+< Alternate-Protocol: 80:quic
+< 
+* Ignoring the response-body
+{ [data not shown]
+* Connection #0 to host google.com left intact
+* Issue another request to this URL: 'http://www.google.com/'
+* Adding handle: conn: 0x7fbf74000000
+* Adding handle: send: 0
+* Adding handle: recv: 0
+* Curl_addHandleToPipeline: length: 1
+* - Conn 1 (0x7fbf74000000) send_pipe: 1, recv_pipe: 0
+* About to connect() to www.google.com port 80 (#1)
+*   Trying 74.125.227.146...
+* Connected to www.google.com (74.125.227.146) port 80 (#1)
+> GET / HTTP/1.1
+> User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
+> Host: www.google.com
+> Accept: */*
+> Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+> Accept-Language: en-US,en;q=0.8
+> 
+< HTTP/1.1 302 Found
+< Location: https://www.google.com/
+< Cache-Control: private
+< Content-Type: text/html; charset=UTF-8
+< Set-Cookie: PREF=ID=77b00fbe5decab8e:FF=0:TM=1390701217:LM=1390701217:S=3gKpHg2pyB6Id8Yt; expires=Tue, 26-Jan-2016 01:53:37 GMT; path=/; domain=.google.com
+< Set-Cookie: NID=67=oMe9hWMIVioDJwDxUMlQrIT8Dq2q-pGtaySzK22gNWUUYRbVa_NKjL4PYVhRe04FHTda_FK3hpXdhU2np7PXhEyW1CSFsBJe6LwlQ1xJ3KhtTHjKp6tfu4GM-SByKIBo; expires=Mon, 28-Jul-2014 01:53:37 GMT; path=/; domain=.google.com; HttpOnly
+< P3P: CP="This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=151657 for more info."
+< Date: Sun, 26 Jan 2014 01:53:37 GMT
+* Server gws is not blacklisted
+< Server: gws
+< Content-Length: 220
+< X-XSS-Protection: 1; mode=block
+< X-Frame-Options: SAMEORIGIN
+< Alternate-Protocol: 80:quic
+< 
+* Ignoring the response-body
+{ [data not shown]
+* Connection #1 to host www.google.com left intact
+* Issue another request to this URL: 'https://www.google.com/'
+* Found bundle for host www.google.com: 0x7fbf72701eb0
+* Adding handle: conn: 0x7fbf73801000
+* Adding handle: send: 0
+* Adding handle: recv: 0
+* Curl_addHandleToPipeline: length: 1
+* - Conn 1 (0x7fbf74000000) send_pipe: 0, recv_pipe: 0
+* - Conn 2 (0x7fbf73801000) send_pipe: 1, recv_pipe: 0
+* About to connect() to www.google.com port 443 (#2)
+*   Trying 74.125.227.146...
+* Connected to www.google.com (74.125.227.146) port 443 (#2)
+* TLS 1.2 connection using TLS_ECDHE_RSA_WITH_RC4_128_SHA
+* Server certificate: www.google.com
+* Server certificate: Google Internet Authority G2
+* Server certificate: GeoTrust Global CA
+* Server certificate: Equifax Secure Certificate Authority
+> GET / HTTP/1.1
+> User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
+> Host: www.google.com
+> Accept: */*
+> Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+> Accept-Language: en-US,en;q=0.8
+> 
+< HTTP/1.1 200 OK
+< Date: Sun, 26 Jan 2014 01:53:38 GMT
+< Expires: -1
+< Cache-Control: private, max-age=0
+< Content-Type: text/html; charset=UTF-8
+< Set-Cookie: PREF=ID=8803ab1d0ba0573f:FF=0:TM=1390701218:LM=1390701218:S=xbglySJeA-QfX2d9; expires=Tue, 26-Jan-2016 01:53:38 GMT; path=/; domain=.google.com
+< Set-Cookie: NID=67=Gienj1kwRKbHpZIt-Ua8phj2E5FvY22zogv94LQXw-4PQM5EP0H-4CogOOYQ1VulARJFRaSJSDC1z9iuCaZD2X4Xq4ewlCgqquihSZpcHeFIRc3AdZeIExYWUzuif1z2; expires=Mon, 28-Jul-2014 01:53:38 GMT; path=/; domain=.google.com; HttpOnly
+< P3P: CP="This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=151657 for more info."
+* Server gws is not blacklisted
+< Server: gws
+< X-XSS-Protection: 1; mode=block
+< X-Frame-Options: SAMEORIGIN
+< Alternate-Protocol: 443:quic
+< Transfer-Encoding: chunked
+< 
+{ [data not shown]
+* Connection #2 to host www.google.com left intact
+* About to connect() to 127.0.0.1 port 9050 (#3)
+*   Trying 127.0.0.1...
+* Adding handle: conn: 0x7fbf73806e00
+* Adding handle: send: 0
+* Adding handle: recv: 0
+* Curl_addHandleToPipeline: length: 1
+* - Conn 3 (0x7fbf73806e00) send_pipe: 1, recv_pipe: 0
+* Connected to 127.0.0.1 (127.0.0.1) port 9050 (#3)
+> GET / HTTP/1.1
+> User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
+> Host: 127.0.0.1:9050
+> Accept: */*
+> Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+> Accept-Language: en-US,en;q=0.8
+> 
+* HTTP 1.0, assume close after body
+< HTTP/1.0 501 Tor is not an HTTP Proxy
+< Content-Type: text/html; charset=iso-8859-1
+< 
+{ [data not shown]
+* Closing connection 3
