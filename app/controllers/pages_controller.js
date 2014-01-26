@@ -39,7 +39,6 @@ var sock = '--socks5-hostname localhost:9050'
 var endpoint = '"http://smallseotools.com/keywordpos_parser.php?action=check"'
 var cmd = 'curl -v '+sock+' '+r+' '+d+' '+endpoint;
 
-consolelog(cmd)
 console.log('-----')
 // http://nodejs.org/api.html#_child_processes
 var sys = require('sys')
