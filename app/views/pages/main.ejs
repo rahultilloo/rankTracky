@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Ultimate Google SERP Tracker | 100% Accurate Google SERP Results</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.0.3/css/font-awesome.min.css" />
 <script type="text/javascript" src="//cdn.jsdelivr.net/knockout/3.0.0beta/knockout.js"></script>
@@ -21,15 +21,15 @@
   </script>
   </head>
   <body>
-    <h1>Google Rank Tracker!</h1>
-    <p>Instant Google Rank Tracking wih US IP's</p>
+    <h1>Ultimate Google SERP Tracker</h1>
+    <p>100% Accurate Google SERP Results</p>
     
 
     <div class="tagContainer">
   
 </div>
 <form class="form-wrapper" method="/api/">
-    <input name="website" type="text" id="search" placeholder="Website" required>
+    <input name="website" type="text" id="search" placeholder="http://example.com" required>
     <div class="" id="submit">
     	<i class="fa fa-rocket button-icon"></i> 
     	<i class="fa fa-cog fa-spin loader"></i>
@@ -40,11 +40,18 @@ Submit
 </form>
 <form class="form-wrapper">
   <h2>Results</h2>
-  <table>
+  <table style="width:100%;">
+<head>
+	<tr>
+<th>Keyword</th>
+<th>Position</th>
 
-<tbody data-bind="foreach: all">
+	</tr>
+</thead>
+<tbody data-bind="foreach: serps">
 <tr>
-	<td><a data-bind="text:$data.response"></a></td>
+	<td><a data-bind="text:$data.keyword"></a></td>
+	<td><b><a data-bind="text:$data.results[1]"></a><b></td>
 </tbody>
   </table>
 
@@ -52,11 +59,35 @@ Submit
 </form>
 <script>
 var ViewModel = function() {
-    this.all = ko.observableArray([]);
+	var self = this;
+    self.all = ko.observableArray([]);
+    self.serps = ko.computed(function() {
+    	var serp = [];
+    	ko.utils.arrayForEach(self.all(), function(item) {
+    		var results = item.results;
+    		console.log(results.length)
+    		if(results.length < 7)
+    		{
+    			    		var results = results.replace(/\n|\r/g, " ").split(" ");
+    			item.results = results;
+    	serp.push(item)
+    	}
+  
+    });
+    return serp;
+    })
+ 
 };
-
+function http(str)
+{
+    var tarea = str;
+    if (tarea.indexOf("http://")==0 && tarea.indexOf("https://")==0) {
+        return false
+    }
+}
 
 $(document).ready(function(){
+
 	 var vm = new ViewModel()
 ko.applyBindings(vm); 
 	$(".loader").hide();
@@ -66,15 +97,42 @@ ko.applyBindings(vm);
 		        	'defaultText':''
 	        	});
 	$("#submit").on('click',function(e){
+		var self = $(this)
+		if(self.hasClass('disabled'))
+		{
+			return false;
+		}
+	   var website = $.trim($('input[name="website"]').val());
+		var keywords = $.trim($('input[name="keywords"]').val());
+if(website == '' || keywords == '')
+{
+	alert('Missing parameters')
+	return false;
+}
+if(http(website) == false)
+{
+	alert('Needs to be a valid url')
+	return;
+}
+
+
+		self.addClass('disabled')
 			$(".loader").show();
 			$(".button-icon").hide();
 		e.preventDefault();
-		var website = $('input[name="website"]').val();
-		var keywords = $('input[name="keywords"]').val();
-		console.log(website)
+	
 	$.post('/api',{website:website,keywords:keywords},function(r){
+
 			$(".loader").hide();
-						$(".button-icon").show();
+			$(".button-icon").show();
+			self.removeClass('disabled');
+			if(r.type == 'error')
+			{
+
+alert(r.response);
+				return;
+			}
+
 
 		vm.all(r.response)
 	})

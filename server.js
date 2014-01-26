@@ -1,5 +1,5 @@
 var port;
-  if(process.env.NODE_ENV == 'development' || process.env.NODE_ENV == 'milo')
+  if(process.env.NODE_ENV == 'development')
   {
 port = 3000;
   }else{
