@@ -18,6 +18,10 @@ PagesController.api = function() {
 	var self = this;
 	var domain = self.param('website')
 	var keywords = self.param('keywords')
+	if(keywords == undefined || domain == undefined)
+	{
+		return false;
+	}
 	var keywordArray = keywords.split(',') || [];
 
 	var parsedURL = URL.parse(domain);
