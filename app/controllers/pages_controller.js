@@ -5,19 +5,134 @@ var http = require('http')
 var PagesController = new Controller();
 var unirest = require('unirest');
 var async = require('async');
+var TrackModel = require('../models/trackModel');
+var AccountModel = require('../models/accountModel');
+
+var Cookies = require( "cookies" )
+
+PagesController.subscribe = function() {
+var self = this;
+console.log(self.param('stripeToken'));
+
+}
 PagesController.main = function() {
 	var self = this;
 	self.title = ' '
 	self.render();
 }
+PagesController.logout = function() {
+	var self = this;
+	  self.req.logout();
+  self.res.redirect('/');
+}
 
+
+
+
+PagesController.account = function() {
+		var self = this;
+	if(self.req.user == null || self.req.user == undefined)
+	{
+		self.redirect('/auth/google');
+	}
+var cookies = new Cookies( self.req, self.res )
+var obj = JSON.parse(decodeURIComponent(cookies.get('track')));
+
+
+async.series([
+    function(callback){
+       if(obj != undefined && obj.keywords != undefined && obj.domain != undefined)
+{
+	var TR = new TrackModel();
+		TR.keywords = obj.keywords;
+		TR.website = obj.domain;
+		TR.gid = self.req.user.gid;
+		TR.aid = self.req.user._id;
+		TR.save(function(ee,rr){
+			console.log(ee)
+ callback(null, rr);
+		})
+}else{
+ callback(null, null);
+}
+       
+    },
+    function(callback){
+TrackModel.find({'aid':self.req.user._id},function(e,r){
+
+		callback(e,r)
+	
+})
+
+    }
+],
+// optional callback
+function(err, results){
+   console.log(results)
+   if(results)
+   {
+ self.tracking = JSON.stringify(results[1]);
+   }else{
+   	 self.tracking = false;
+   }
+  
+   self.render();
+});
+
+
+
+}
+
+PagesController.add = function() {
+	var self = this;
+	var self = this;
+	var domain = self.param('website');
+	var keywords = self.param('keywords');
+	AccountModel.findById(self.req.user._id,function(e,r){
+		if(r)
+	{
+		var TR = new TrackModel();
+		TR.keywords = keywords;
+		TR.domain = domain;
+		TR.gid = r.gid;
+		TR.aid = r._id;
+		TR.save(function(ee,rr){
+			self.res.send({'type':'success','response':rr})
+		})
+
+	}
+	})
+
+}
+PagesController.delete = function() {
+	var self = this;
+	var object = self.param('object');
+	var id = self.param('id');
+	if(object == 'website')
+	{
+TrackModel.findById(id).remove(function(e){
+
+	if(e)
+	{
+		self.res.send({type:'error',response:e})
+	}
+			self.res.send({type:'success'})
+
+})
+	}
+
+
+
+}
 
 PagesController.api = function() {
 	var self = this;
-	self.title = 'Locomotive'
 	var self = this;
 	var domain = self.param('website')
 	var keywords = self.param('keywords')
+   var id  = self.param('id') || null
+   var action  = self.param('action') || null
+
 	if(keywords == undefined || domain == undefined)
 	{
 		return false;
@@ -25,7 +140,6 @@ PagesController.api = function() {
 	var keywordArray = keywords.split(',') || [];
 
 	var parsedURL = URL.parse(domain);
-	console.log(parsedURL)
 	if(parsedURL.hostname == undefined)
 	{
 
@@ -53,7 +167,6 @@ PagesController.api = function() {
 		var endpoint = '"http://smallseotools.com/keywordpos_parser.php?action=check"'
 		var cmd = 'curl -v ' + sock + ' ' + r + ' ' + d + ' ' + endpoint;
 
-		console.log('-----')
 		// http://nodejs.org/api.html#_child_processes
 		var sys = require('sys')
 		var exec = require('child_process').exec;
@@ -61,7 +174,7 @@ PagesController.api = function() {
 
 		child = exec(cmd, function(error, stdout, stderr) {
 
-				if (stdout == 'SERVICE_UNAVAILABLE') {
+				if (stdout == 'SERVICE_UNAVAILABLE' || stdout 'Banned - Access Denied') {
 					console.log('time to restart tor');
 					var child2;
 					var child2 = exec('killall -HUP tor', function(error2, stdout2, stderr2) {
@@ -85,10 +198,16 @@ PagesController.api = function() {
 	}
 
 	async.mapLimit(arr, 10, checkGoogle, function(err, results) {
+		if(action == 'save')
+		{
+
+		}else{
 		self.res.send({
 			type: 'success',
 			response: results
 		})
+		}
+
 
 
 
@@ -96,7 +215,6 @@ PagesController.api = function() {
 
 
 }
-
 
 
 module.exports = PagesController;

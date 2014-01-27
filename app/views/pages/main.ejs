@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>SerpRankChecker.com | Free Google SERP checker | Google SERP Tool</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+
     <link rel="stylesheet" href="/stylesheets/style.css" />
+
+
     <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.0.3/css/font-awesome.min.css" />
 <script type="text/javascript" src="//cdn.jsdelivr.net/knockout/3.0.0beta/knockout.js"></script>
 
@@ -10,8 +14,11 @@
         <script>window.jQuery || document.write('<script src="/2013/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'></script>
 
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"/></script>
+
 
     <script src="http://xoxco.com/2013/js/jQuery-Tags-Input/jquery.tagsinput.js"/></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.cookie/1.4.0/jquery.cookie.min.js"></script>
 
   <style>
 
@@ -24,25 +31,32 @@
     <h1>Google SERP Rank Checker</h1>
     <h3>Search engine rank position checker</h3>
     
-
-    <div class="tagContainer">
-  
-</div>
-<form class="form-wrapper" method="/api/">
+<div class="container">
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+<form class="form-wrapper">
+	    <div class="col-md-8">
     <input name="website" type="text" id="search" placeholder="http://example.com" required>
-    <div class="" id="submit">
+    <input name = "keywords" class="tags" type="text"/>
+        <div style="display:block; width:100%; float:left; clear:bothl">
+  <i><small>More keywords you use, longer it takes to obtain results</small></i>
+</div>
+
+</div>
+    <div class="col-md-4">
+    <div class="btn btn-custom" id="submit">
     	<i class="fa fa-rocket button-icon"></i> 
     	<i class="fa fa-cog fa-spin loader"></i>
 Submit
     </div>
-    <div style="display:block; width:100%; float:left; clear:bothl">
-    <input name = "keywords" class="tags" type="text"/>
-    </div>
-    <div style="display:block; width:100%; float:left; clear:bothl">
-  <i><small>More keywords you use, longer it takes to obtain results</small></i>
-</div>
-
+        <a class="btn btn-custom" id="track" style="margin-top:5px">
+    	<i class="fa fa-thumbs-up"></i> 
+Track
+    </a>
 </form>
+</div>
+</div>
+		<div class="col-md-8 col-md-offset-2">
 <form class="form-wrapper">
   <h2>Results</h2>
   <table style="width:100%;">
@@ -59,9 +73,14 @@ Submit
 	<td><b><a data-bind="text:$data.results[1]"></a><b></td>
 </tbody>
   </table>
-
-
 </form>
+</div>
+</div><!-- CONTAINER-->
+
+
+
+
+
 <script>
 var ViewModel = function() {
 	var self = this;
@@ -92,6 +111,14 @@ function http(str)
 }
 
 $(document).ready(function(){
+
+$("#track").click(function(){
+	var website = $("input[name='website']").val();
+		var keywords = $("input[name='keywords']").val();
+var obj = JSON.stringify({domain:website,keywords:keywords});
+	$.cookie('track', obj, { expires: 7, path: '/' });
+	window.location.href = '/account';
+})
 
 	 var vm = new ViewModel()
 ko.applyBindings(vm); 

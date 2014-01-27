@@ -56,10 +56,35 @@ passport.use(new GoogleStrategy({
         callbackURL: config.publishers.Google.callbackURL
     },
     function(token, refreshToken, profile, done) {
-        console.log(profile)
-        /*
- AccountModel
-  */
+
+
+
+
+
+AccountModel.findOne({'gid': profile.id},function(e,r){
+if(r == null || r.length === 0)
+{
+   var user = new AccountModel();
+   user.gid = profile.id;
+   user.displayName = profile.displayName;
+user.familyName = profile.familyName;
+user.givenName = profile.givenName;
+user.email.push(profile.emails);
+user.refreshToken = refreshToken;
+user.save(function(ee,rr){
+    console.log('USER SAVE')
+    console.log(rr);
+    console.log(ee);
+        done(null,rr)
+
+})
+}else{
+        console.log('USER FOUND')
+
+    done(null,r)
+}
+
+})
     }))
 
 
@@ -69,6 +94,7 @@ passport.use(new GoogleStrategy({
  * Passport session serialize
  */
 passport.serializeUser(function(user, done) {
+    console.log(user)
     done(null, user._id);
 });
 
@@ -76,7 +102,7 @@ passport.serializeUser(function(user, done) {
  * Passport session deserialize
  */
 passport.deserializeUser(function(id, done) {
-    accountModel.findById(id, function(err, user) {
+    AccountModel.findById(id, function(err, user) {
         done(err, user);
     });
 });

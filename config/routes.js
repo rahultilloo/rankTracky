@@ -6,11 +6,23 @@
 // Guide on [routing](http://locomotivejs.org/guide/routing.html) for additional
 // information.
 var passport = require('passport');
+var Authenticator = require('passport');
+
 module.exports = function routes() {
 	this.root('pages#main');
 
 	/** Authentications **/
-	this.match('api', "pages#api",{via : ['POST','GET']});
+	this.match('api/track', "pages#api",{via : ['POST','GET']});
+		this.match('api/add', "pages#add",{via : ['POST','GET']});
+		this.match('api/delete', "pages#delete",{via : ['POST','GET']});
+
+	this.match('subscribe', "pages#subscribe",{via : ['POST','GET']});
+
+	this.match('account', "pages#account",{via : ['POST','GET']});
+
+	this.match('logout', "pages#logout",{via : ['POST','GET']});
+
+
 
 	this.match('auth', passport.authenticate('local', {
 			successRedirect: '/',
@@ -25,12 +37,17 @@ module.exports = function routes() {
 		//Google Strategy
 		this.match('auth/google', passport.authenticate('google', {
 			accessType: 'offline',
-			approvalPrompt: 'force',
-			scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/plus.login']
+				successRedirect: '/account',
+			failureRedirect: '/',
+			scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/plus.login','https://www.googleapis.com/auth/userinfo.email']
 		}),{via:['post','get']}); 
 
-		this.match('auth/google/callback', passport.authenticate('google'));
-
+	this.match('auth/google/callback', passport.authenticate('google', {
+			accessType: 'offline',
+				successRedirect: '/account',
+			failureRedirect: '/',
+			scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/plus.login','https://www.googleapis.com/auth/userinfo.email']
+		}),{via:['post','get']}); 
 
 
 	}

@@ -23,6 +23,12 @@
     "socks5-http-client": "~0.1.6",
     "socksified": "0.0.2",
     "node-curl": "~0.3.1",
-    "curlrequest": "~0.4.1"
+    "curlrequest": "~0.4.1",
+    "density": "~0.1.0",
+    "request": "~2.33.0",
+    "gramophone": "0.0.3",
+    "cookies": "~0.3.8",
+    "node-schedule": "~0.1.13",
+    "cron": "~1.0.1"
   }
 }

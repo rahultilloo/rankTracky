@@ -4,25 +4,39 @@ var Schema = mongoose.Schema;
 mongooseTypes.loadTypes(mongoose, "email");
 var Email = mongoose.SchemaTypes.Email;
 var AccountSchema = new Schema({
-    username: {
+    gid: {
         type: String,
-        unique: true,
         required: true
     },
-    email: {
+    name : {
+        type: String
+    },
+    given_name: {
         type: Email,
-        unique: true,
-        required: true
     },
-    password: {
+    family_name: {
         type: String
     },
-    offline: {
+    link: {
         type: String
+    },
+      gender: {
+        type: String
+    },
+    locale : {
+  type: String
+    },
+refreshToken : {
+  type: String
     },
     created: {
         type: Date,
         default: Date.now
     },
+
+      email: { type : Array , "default" : [] }
 });
+
+
+
 module.exports = mongoose.model('Account', AccountSchema);

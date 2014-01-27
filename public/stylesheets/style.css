@@ -30,7 +30,6 @@ a {
 	margin: 10px auto;
 	overflow: hidden;
 	padding: 8px;
-	width: 450px;
 }
 
 .form-wrapper input[type="text"] {
@@ -44,9 +43,8 @@ a {
   color: #999;
 	float: left;
 	font: 16px Lucida Sans, Trebuchet MS, Tahoma, sans-serif;
-	height: 20px;
 	padding: 10px;
-	width: 320px;
+	width: 100%;
 }
 
 .form-wrapper input[type="text"]:focus {
@@ -64,7 +62,7 @@ a {
 	font-weight: normal;
 }
 
-.form-wrapper #submit {
+.form-wrapper .button {
 	background-color: #0483a0;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#31b2c3), to(#0483a0));
 	background-image: -webkit-linear-gradient(top, #31b2c3, #0483a0);
@@ -89,8 +87,8 @@ a {
 	width: 100px;
 }
 
-.form-wrapper #submit:hover,
-.form-wrapper #submit:focus {
+.form-wrapper .button:hover,
+.form-wrapper .button:focus {
 	background-color: #31b2c3;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#0483a0), to(#31b2c3));
 	background-image: -webkit-linear-gradient(top, #0483a0, #31b2c3);
@@ -100,14 +98,14 @@ a {
 	background-image: linear-gradient(top, #0483a0, #31b2c3);
 }
 
-.form-wrapper #submit:active {
+.form-wrapper .button:active {
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
 	outline: 0;
 }
 
-.form-wrapper #submit::-moz-focus-inner {
+.form-wrapper .button::-moz-focus-inner {
 	border: 0;
 }
 div.tagsinput { border:1px solid #CCC; background: #FFF; padding:5px; width:300px; height:100px; overflow-y: auto;}
@@ -119,9 +117,44 @@ div.tagsinput div { display:block; float: left; }
 .not_valid {background: #FBD8DB !important; color: #90111A !important;}
 .tagsinput {
 	float:left;
-	width:320px !important;
+	width:100% !important;
 	padding:10px !important;
 	margin-top:4px;
 	height:auto !important;
 	min-height:0px !important;
+}
+.container {
+	width:900px;
+}
+ul {
+	text-align:left;
+}
+ul li {
+	color:black;
+	text-decoration: none;
+}
+ul li a {
+	text-decoration: none;
+}
+a:hover {
+		text-decoration: none;
+
+}
+
+.btn-custom {
+	width:100%;
+  background-color: hsl(0, 0%, 16%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5b5b5b", endColorstr="#282828");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#5b5b5b), to(#282828));
+  background-image: -moz-linear-gradient(top, #5b5b5b, #282828);
+  background-image: -ms-linear-gradient(top, #5b5b5b, #282828);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b5b5b), color-stop(100%, #282828));
+  background-image: -webkit-linear-gradient(top, #5b5b5b, #282828);
+  background-image: -o-linear-gradient(top, #5b5b5b, #282828);
+  background-image: linear-gradient(#5b5b5b, #282828);
+  border-color: #282828 #282828 hsl(0, 0%, 11%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+  -webkit-font-smoothing: antialiased;
 }
