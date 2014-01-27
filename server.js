@@ -5,6 +5,7 @@ port = 3000;
   }else{
 port = 80;
   }
+  /*
 var d = new Date(),
 month = d.getMonths(),
 year = d.getFullYear(),
@@ -23,7 +24,7 @@ console.log(r)
 
 }, null, true, "America/Los_Angeles");
 
-
+*/
 var locomotive = require('locomotive'),
         env = process.env.NODE_ENV || 'production',
         port = port,
