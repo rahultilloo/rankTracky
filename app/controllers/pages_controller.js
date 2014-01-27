@@ -174,7 +174,7 @@ PagesController.api = function() {
 
 		child = exec(cmd, function(error, stdout, stderr) {
 
-				if (stdout == 'SERVICE_UNAVAILABLE' || stdout 'Banned - Access Denied') {
+				if (stdout == 'SERVICE_UNAVAILABLE' || stdout == 'Banned - Access Denied') {
 					console.log('time to restart tor');
 					var child2;
 					var child2 = exec('killall -HUP tor', function(error2, stdout2, stderr2) {

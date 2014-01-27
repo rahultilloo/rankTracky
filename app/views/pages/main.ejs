@@ -153,7 +153,7 @@ if(http(website) == false)
 			$(".button-icon").hide();
 		e.preventDefault();
 	
-	$.post('/api',{website:website,keywords:keywords},function(r){
+	$.post('/api/track',{website:website,keywords:keywords},function(r){
 
 			$(".loader").hide();
 			$(".button-icon").show();
